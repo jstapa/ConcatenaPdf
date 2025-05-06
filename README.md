@@ -1,0 +1,2 @@
+# ConcatenaPdf
+Liberada bajo AGPL
