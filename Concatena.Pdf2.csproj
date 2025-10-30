@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PublishDir>publish\</PublishDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\PdfController_base64.cs" />
+    <Compile Remove="optimizador.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="log4net.config" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="itext7" Version="9.2.0" />
+    <PackageReference Include="itext7.bouncy-castle-adapter" Version="9.2.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="log4net" Version="3.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.6.2" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.9" />
+    <!-- Downgrade for compatibility with Swashbuckle -->
+    
+  </ItemGroup>
+
+
+  
+  <ItemGroup>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="2.88.3" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="2.88.3" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.3" />
+    <PackageReference Include="HarfBuzzSharp" Version="2.8.2.3" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.Win32" Version="2.8.2.3" />
+  </ItemGroup>
+
+  <Target Name="CopySkiaNativeAssets" AfterTargets="Publish">
+    <ItemGroup>
+      <SkiaAssets Include="$(NuGetPackageRoot)\skiasharp.nativeassets.win32\2.88.3\runtimes\win-x64\native\*.dll" />
+      <HarfBuzzAssets Include="$(NuGetPackageRoot)\harfbuzzsharp.nativeassets.win32\2.8.2.3\runtimes\win-x64\native\*.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(SkiaAssets)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(HarfBuzzAssets)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+
+</Project>

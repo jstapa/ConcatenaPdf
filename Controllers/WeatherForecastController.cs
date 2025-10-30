@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Concatena.Pdf.Controllers
+namespace Concatena.Pdf2.Controllers
 {
     [ApiController]
     [Route("[controller]")]

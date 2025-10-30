@@ -1,4 +1,4 @@
-namespace Concatena.Pdf
+namespace Concatena.Pdf2
 {
     public class WeatherForecast
     {
